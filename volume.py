@@ -28,7 +28,7 @@ class VolPowerMate(powermate.PowerMateBase):
             self.__m.setvolume(0)
             return powermate.LedEvent.pulse()
         else:
-            sefl.__m.setvolume(self.__globvol)
+            self.__m.setvolume(self.__globvol)
             return powermate.LedEvent.percent(self.globvol / 100)
 
 
