@@ -2,7 +2,9 @@
 
 
 from __future__ import division
-import glob, powermate, alsaaudio
+import glob
+import powermate
+import alsaaudio
 
 
 class VolPowerMate(powermate.PowerMateBase):
@@ -48,7 +50,19 @@ class VolPowerMate(powermate.PowerMateBase):
             return powermate.LedEvent.pulse()
 
 
-if __name__ == '__main__':
+def main():
+    """
+    Main function for checking input device existance and initialization.
+    """
     mixer = 'Headphone'
-    pm = VolPowerMate(glob.glob('/dev/input/by-id/*PowerMate*')[0], mixer)
-    pm.run()
+
+    pm_devices = glob.glob('/dev/input/by-id/*PowerMate*')
+    if not pm_devices:
+        return
+
+    pm_device = pm_devices[0]
+    VolPowerMate(pm_device, mixer).run()
+
+
+if __name__ == '__main__':
+    main()
